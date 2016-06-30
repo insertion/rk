@@ -16,4 +16,4 @@ default:
 install:
 	insmod ./wnps.ko
 clean:
-	rm -f *.o *.cmd *.ko *.mod.c
+	make -C $(KERNELBUILD) M=$(shell pwd) clean

